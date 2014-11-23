@@ -10,8 +10,11 @@ public:
 	virtual std::string getNthPopular(unsigned int n);
     virtual void add(std::string s, unsigned int n);
     
+    
+    
+    
     protected:
-    std::vector<int> sortedArray;
-    std::unordered_map<std::string, int> hashTable;
+    std::vector<std::pair<std::string, unsigned int> > sortedArray;
+    std::unordered_map<std::string, unsigned int> hashTable;
 
 };
