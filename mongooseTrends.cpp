@@ -30,10 +30,19 @@ bool compareFunc(std::pair<std::string, unsigned int> i, std::pair<std::string, 
 }
 
 void mongooseTrends::increaseCount(std::string s, unsigned int amount)	{
-    //case 1: String s is already in the hashTable and array. Add amount to its count(increment word function)
+	//case 1: String s is not in the hashTable/Array. Create s and set count to amount (regular case)
+	
+	auto place = hashTable.find(s);	//http://en.cppreference.com/w/cpp/container/unordered_map/find
+
+	if (hashTable.count(s) == 0)	{
+		add(s, amount);
+	}
+	else
+	{
+		increment_word(s, amount, place);
+	}
     
-    
-    //case 2: String s is not in the hashTable/Array. Create s and set count to amount (regular case)
+	//case 2: String s is already in the hashTable and array. Add amount to its count(increment word function)
 }
 
 void mongooseTrends::add(std::string s, unsigned int n){
@@ -43,6 +52,21 @@ void mongooseTrends::add(std::string s, unsigned int n){
     hashTable.insert(addition);
     sortedArray.push_back(addition);
     
+}
+
+void mongooseTrends::increment_word(std::string s, unsigned int n, std::unordered_map<std::string, unsigned int>::iterator place)	{
+	place->second += n;
+	bool cont = true;
+	
+	//relies on the assumption that more often than not, you're going to be incrementing words at the beginning of the 
+	for (int i = 0; i < sortedArray.size() && cont; i++)	{
+		if (sortedArray.at(i).first == s)	{
+			sortedArray.at(i).second += n;
+			cont = false;
+		}
+	}
+
+
 }
 
 
