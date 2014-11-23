@@ -26,16 +26,16 @@ unsigned int naiveTrends::getCount(std::string s){
 	return 0;
 }
 
-bool compareFunc(std::pair<std::string, unsigned int> i, std::pair<std::string, unsigned int> j) {
-	if (i.second == j.second){
-		return (i.first < j.first);
-	}
+//bool compareFunc(std::pair<std::string, unsigned int> i, std::pair<std::string, unsigned int> j) {
+	//if (i.second == j.second){
+		//return (i.first < j.first);
+	//}
 
-	return (i.second > j.second);
-}
+	//return (i.second > j.second);
+//}
 
 std::string naiveTrends::getNthPopular(unsigned int n){
-	std::sort(wordCountVector.begin(), wordCountVector.end(), compareFunc);
+	//std::sort(wordCountVector.begin(), wordCountVector.end(), compareFunc);
 	if (n <= numEntries()){
 		return wordCountVector[n].first;
 	}

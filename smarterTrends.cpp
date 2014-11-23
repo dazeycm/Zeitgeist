@@ -2,7 +2,7 @@
 #include <algorithm>
 
 //This function is defined in naiveTrends.cpp
-bool compareFunc(std::pair<std::string, unsigned int> i, std::pair<std::string, unsigned int> j);
+//bool compareFunc(std::pair<std::string, unsigned int> i, std::pair<std::string, unsigned int> j);
 
 void smarterTrends::increaseCount(std::string s, unsigned int amount){
 	unsigned int startSize = numEntries();
@@ -14,7 +14,7 @@ void smarterTrends::increaseCount(std::string s, unsigned int amount){
 
 std::string smarterTrends::getNthPopular(unsigned int n){
 	if (!isSorted){
-		std::sort(wordCountVector.begin(), wordCountVector.end(), compareFunc);
+		//std::sort(wordCountVector.begin(), wordCountVector.end(), compareFunc);
 		isSorted = true;
 	}
 
