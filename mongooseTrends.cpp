@@ -30,10 +30,10 @@ bool compareFunc(std::pair<std::string, unsigned int> i, std::pair<std::string, 
 }
 
 void mongooseTrends::increaseCount(std::string s, unsigned int amount)	{
-    //case 1: String s is already in the hashTable and array. Add amount to its count
+    //case 1: String s is already in the hashTable and array. Add amount to its count(increment word function)
     
     
-    //case 2: String s is not in the hashTable/Array. Create s and set count to amount
+    //case 2: String s is not in the hashTable/Array. Create s and set count to amount (regular case)
 }
 
 void mongooseTrends::add(std::string s, unsigned int n){
