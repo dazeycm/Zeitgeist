@@ -15,3 +15,11 @@ std::string mongooseTrends::getNthPopular(unsigned int n)	{
 void mongooseTrends::increaseCount(std::string s, unsigned int amount)	{
 
 }
+
+void mongooseTrends::add(std::string s, unsigned int n){
+    
+    std::pair<std::string, int> addition (s, n);
+    
+    hashTable.insert(addition);
+    
+}
