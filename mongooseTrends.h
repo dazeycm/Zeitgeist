@@ -10,6 +10,7 @@ public:
 	virtual std::string getNthPopular(unsigned int n);
     virtual void add(std::string s, unsigned int n);
 	virtual void increment_word(std::string s, unsigned int n, std::unordered_map<std::string, unsigned int>::iterator &iterator);
+	bool isSorted;
     
     
     

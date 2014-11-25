@@ -1,7 +1,10 @@
 #include "mongooseTrends.h"
+
 #include <algorithm>
 
 bool compareFunc(std::pair<std::string, unsigned int> i, std::pair<std::string, unsigned int> j);
+
+bool isSorted = false;
 
 unsigned int mongooseTrends::getCount(std::string s)	{
     
@@ -23,8 +26,11 @@ unsigned int mongooseTrends::numEntries()	{
 
 std::string mongooseTrends::getNthPopular(unsigned int n)	{
     
-    
-    std::sort(sortedArray.begin(), sortedArray.end(), compareFunc);
+    if(!isSorted)	{
+		std::sort(sortedArray.begin(), sortedArray.end(), compareFunc);
+		isSorted = true;
+	}
+
     std::string ret = sortedArray[n].first;
 
     return ret;
@@ -45,6 +51,8 @@ void mongooseTrends::increaseCount(std::string s, unsigned int amount)	{
 	//case 1: String s is not in the hashTable/Array. Create s and set count to amount (regular case)
 	
 	auto place = hashTable.find(s);	//http://en.cppreference.com/w/cpp/container/unordered_map/find
+
+	isSorted = false;
 
 	if (hashTable.count(s) == 0)	{
 		add(s, amount);

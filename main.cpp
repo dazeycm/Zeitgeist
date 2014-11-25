@@ -11,7 +11,9 @@
 #include <vector>
 #include <time.h>
 
-#include "mongooseTrends.h" //You will need to change this to match your own class
+//#include "Trends.h"
+//#include "mongooseTrends.h" //You will need to change this to match your own class
+#include "smarterTrends.h"
 #include "utilities.h"
 
 /**
@@ -21,7 +23,7 @@
  * Compare your 28885.txt.out to 28885_txt.out, using diff,s to see if your code is producing correct output.
  */
 double useCase_addAllThenGetInOrder(){
-	Trends* tr = new mongooseTrends(); //You will need to change this to match your own class!
+	Trends* tr = new smarterTrends(); //You will need to change this to match your own class!
 
 	std::vector<std::string> wordlist = getWordList("data/28885.txt");
 
@@ -38,7 +40,7 @@ double useCase_addAllThenGetInOrder(){
 
 	//Now we will print out the complete results. This could be REALLY clow, if
 	// your getNthPopular is not a little bit smart.
-	std::string outfname = "data/28885.txt.out";
+	std::string outfname = "data/28885testofhis.txt.out";
 	std::ofstream out(outfname.c_str());
 
 	start = getTimeInMillis();
@@ -56,16 +58,16 @@ double useCase_addAllThenGetInOrder(){
 }
 
 double useCase_makeHisLookBad(){
-	Trends* tr = new mongooseTrends(); //You will need to change this to match your own class!
+	Trends* tr = new smarterTrends(); //You will need to change this to match your own class!
 	std::vector<std::string> wordlist = getWordList("data/28885.txt");
 
 	//We only want to time how long addToTrends takes, so we get
 	// the starting time, which is the clock time, in milliseconds
 	double start = getTimeInMillis();
 	//Now add all the words to the Trends data structure
-	for(unsigned int i=0; i<wordlist.size(); i++){
+	for(unsigned int i=0; i<wordlist.size() - 1; i++){
 		tr->increaseCount(wordlist[i],1);
-		tr->getNthPopular(wordlist.size());
+		//tr->getNthPopular(1);
 	}
 	//Now get the end time
 	double end = getTimeInMillis();
@@ -75,6 +77,31 @@ double useCase_makeHisLookBad(){
 
 	return end - start;
 }
+
+double useCase_getCount(){
+	Trends* tr = new smarterTrends(); //You will need to change this to match your own class!
+	std::vector<std::string> wordlist = getWordList("data/28885.txt");
+	for(unsigned int i=0; i<wordlist.size() - 1; i++){
+		tr->increaseCount(wordlist[i],1);
+	}
+
+	//We only want to time how long addToTrends takes, so we get
+	// the starting time, which is the clock time, in milliseconds
+	double start = getTimeInMillis();
+	//Now add all the words to the Trends data structure
+	for(unsigned int i=0; i<wordlist.size() - 1; i++){
+		tr->getCount(wordlist[i]);
+	}
+	//Now get the end time
+	double end = getTimeInMillis();
+	std::cout << "get count time: " << (end-start)/wordlist.size() << " ms per word" << std::endl;
+
+	delete tr;
+
+	return end - start;
+}
+
+
 
 
 /*
@@ -88,7 +115,8 @@ int main(){
 	 * in the starter files */
 	
 	useCase_addAllThenGetInOrder();
-	useCase_makeHisLookBad();
+	//useCase_makeHisLookBad();
+	useCase_getCount();
 
 	return 0;
 }
