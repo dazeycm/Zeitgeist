@@ -4,10 +4,20 @@
 bool compareFunc(std::pair<std::string, unsigned int> i, std::pair<std::string, unsigned int> j);
 
 unsigned int mongooseTrends::getCount(std::string s)	{
+    
+    //should loop through the array and return the count of the wanted string else return 0.
+    //assuming you want to know the count of something at the top of the array
+    //this function will be fast.
+    for (int i = 0; i < sortedArray.size(); i++)	{
+        if (sortedArray.at(i).first == s)	{
+            return sortedArray.at(i).second;
+        }
+    }
 	return 0;
 }
 
 unsigned int mongooseTrends::numEntries()	{
+    
 	return sortedArray.size();
 }
 
@@ -22,6 +32,7 @@ std::string mongooseTrends::getNthPopular(unsigned int n)	{
 }
 
 bool compareFunc(std::pair<std::string, unsigned int> i, std::pair<std::string, unsigned int> j) {
+    
     if (i.second == j.second){
         return (i.first < j.first);
     }
@@ -30,6 +41,7 @@ bool compareFunc(std::pair<std::string, unsigned int> i, std::pair<std::string, 
 }
 
 void mongooseTrends::increaseCount(std::string s, unsigned int amount)	{
+    
 	//case 1: String s is not in the hashTable/Array. Create s and set count to amount (regular case)
 	
 	auto place = hashTable.find(s);	//http://en.cppreference.com/w/cpp/container/unordered_map/find
@@ -55,18 +67,17 @@ void mongooseTrends::add(std::string s, unsigned int n){
 }
 
 void mongooseTrends::increment_word(std::string s, unsigned int n, std::unordered_map<std::string, unsigned int>::iterator place)	{
+    
 	place->second += n;
 	bool cont = true;
 	
-	//relies on the assumption that more often than not, you're going to be incrementing words at the beginning of the 
+	//relies on the assumption that more often than not, you're going to be incrementing words at the beginning of the sorted array
 	for (int i = 0; i < sortedArray.size() && cont; i++)	{
 		if (sortedArray.at(i).first == s)	{
 			sortedArray.at(i).second += n;
 			cont = false;
 		}
 	}
-
-
 }
 
 
