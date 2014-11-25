@@ -66,7 +66,7 @@ void mongooseTrends::add(std::string s, unsigned int n){
     
 }
 
-void mongooseTrends::increment_word(std::string s, unsigned int n, std::unordered_map<std::string, unsigned int>::iterator place)	{
+void mongooseTrends::increment_word(std::string s, unsigned int n, std::unordered_map<std::string, unsigned int>::iterator &place)	{
     
 	place->second += n;
 	bool cont = true;
